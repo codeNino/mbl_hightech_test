@@ -49,8 +49,8 @@ training_args = TrainingArguments(
     eval_strategy="epoch",
     save_strategy='epoch',
     learning_rate=2e-5,
-    per_device_train_batch_size=8,
-    per_device_eval_batch_size=8,
+    per_device_train_batch_size=3,
+    per_device_eval_batch_size=3,
     num_train_epochs=1,
     weight_decay=0.01,
     no_cuda=True,
@@ -80,9 +80,9 @@ model_trainer.train()
 print("\n")
 
 # Evaluate the model trainer 
-print("Model Evaluation: \n")
-model_trainer.evaluate()
+print("Model Evaluation: \n", model_trainer.evaluate())
 print("\n")
+
 # Make Predictions With Model
 predictions = model_trainer.predict(test_data)
 preds = torch.tensor(predictions.predictions).argmax(axis=1)
