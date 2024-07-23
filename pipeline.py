@@ -31,7 +31,9 @@ test_data = Dataset.from_dict({'text': X_test.tolist(), 'label': y_test.tolist()
 # Load pre-trained tokenizer and model
 model_name = "xlm-roberta-base"  # Multilingual model
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=ticket_df['queue_enc'].nunique())
+model = AutoModelForSequenceClassification.from_pretrained(model_name, 
+        num_labels=ticket_df['queue_enc'].nunique(),
+        id2label=q_map)
 
 
 # Define  function to tokenize the text data from dataframe
@@ -48,8 +50,9 @@ training_args = TrainingArguments(
     learning_rate=2e-5,
     per_device_train_batch_size=8,
     per_device_eval_batch_size=8,
-    num_train_epochs=2,
+    num_train_epochs=1,
     weight_decay=0.01,
+    use_mps_device=True
 )
 
 # Compute metrics for evaluation

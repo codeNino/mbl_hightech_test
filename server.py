@@ -13,7 +13,7 @@ class TextModel(BaseModel):
 
 # load model and tokenizer
 loaded_model = AutoModelForSequenceClassification.from_pretrained("./intelligence/model")
-loaded_tokenizer = AutoTokenizer.from_pretrained("./classifier/model")
+loaded_tokenizer = AutoTokenizer.from_pretrained("./intelligence/model")
 
 @app.post("/api/v1/classify_text")
 async def ClassifyText(payload: TextModel):

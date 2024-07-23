@@ -26,7 +26,7 @@ COPY serve_requirements.txt .
 RUN pip install --no-cache-dir -r serve_requirements.txt
 
 # Copy the trained model artifacts  from the train stage
-COPY --from=train /app/intelligence /app
+COPY --from=train /app/intelligence /app/intelligence
 
 # Copy the FastAPI app script
 COPY server.py .
