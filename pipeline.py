@@ -32,9 +32,10 @@ test_data = Dataset.from_dict({'text': X_test.tolist(), 'label': y_test.tolist()
 model_name = "xlm-roberta-base"  # Multilingual model
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSequenceClassification.from_pretrained(model_name, 
-        num_labels=ticket_df['queue_enc'].nunique(),
+        num_labels=ticket_df['queue_enc'].nunique(), device_map="auto",
         id2label=q_map)
 
+model.to(torch.device('cpu'))
 
 # Define  function to tokenize the text data from dataframe
 def tokenizing_function(dataframe):
@@ -52,7 +53,8 @@ training_args = TrainingArguments(
     per_device_eval_batch_size=8,
     num_train_epochs=1,
     weight_decay=0.01,
-    use_mps_device=True
+    no_cuda=True,
+    # use_mps_device=True
 )
 
 # Compute metrics for evaluation

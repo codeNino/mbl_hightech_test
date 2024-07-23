@@ -2,3 +2,4 @@ requirements.txt
 Pipfile
 Pipfile.lock
 docker-compose.yml
+intelligence/

@@ -15,8 +15,8 @@ class TextModel(BaseModel):
 loaded_model = AutoModelForSequenceClassification.from_pretrained("./intelligence/model")
 loaded_tokenizer = AutoTokenizer.from_pretrained("./intelligence/model")
 
-@app.post("/api/v1/classify_text")
-async def ClassifyText(payload: TextModel):
+@app.post("/api/v1/classify_ticket")
+async def ClassifyTicket(payload: TextModel):
     try:
         inputs = loaded_tokenizer(payload.ticket, return_tensors="pt")
         with torch.no_grad():
